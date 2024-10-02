@@ -75,4 +75,5 @@ const ResultPage: React.FC<resultPageProps> = ({ params }) => {
   );
 };
 
+
 export default ResultPage;
