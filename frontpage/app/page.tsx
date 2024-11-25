@@ -71,7 +71,7 @@ export default function Home() {
                     <item.icon />
                   </div>
                   <p className="w-full text-[#ada7cd] text-sm font-normal">
-                    Your Trusted News Navigator Delivering Accurate Information
+                    {item?.description}
                   </p>
                 </div>
               );
