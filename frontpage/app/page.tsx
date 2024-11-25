@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import findora from "../public/assets/findora.png";
 import { Search, ThumbsUp, Newspaper, Info } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -25,10 +24,17 @@ export default function Home() {
     },
   ];
   const [search, setSearch] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const router: any = useRouter();
+
+  const handleSearch = () => {
+    setLoading(!loading);
+    router.push(`/pages/result/${search}`);
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      setLoading(!loading);
       router.push(`/pages/result/${search}`);
     }
   };
@@ -50,17 +56,25 @@ export default function Home() {
             <input
               type="text"
               placeholder="Search"
+              disabled={loading}
               onKeyPress={(e) => handleKeyPress(e)}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-[88%] h-full bg-[#ffffff]/5 rounded-[20px] border-[1px] border-[#ffffff]/15 focus:outline-none text-white px-4 text-xl backdrop-blur-[3px]"
             />
-            <Link
-              href={`/pages/result/${search}`}
+            <button
+              onClick={() => handleSearch()}
+              disabled={loading}
               className=" h-full w-[7vh] bg-gradient-to-r from-[#426BFF] to-[#8F79FF] rounded-[20px] flex justify-center items-center"
             >
-              <Search size={30} color="#ffffff" />
-            </Link>
+              {loading ? (
+                <div className="w-full h-full flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-white border-solid"></div>{" "}
+                </div>
+              ) : (
+                <Search size={30} color="#ffffff" />
+              )}
+            </button>
           </div>
           <div className="w-full h-[18vh] flex items-center justify-between">
             {landingCardContent.map((item: any, i: number) => {
