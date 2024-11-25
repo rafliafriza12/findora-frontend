@@ -34,7 +34,6 @@ const Berita: React.FC<BeritaPageProps> = ({ params }) => {
 
   return (
     <div className="w-full">
-      <div className=""></div>
       {isLoading ? (
         <div className="h-screen w-screen flex justify-center items-center">
           <Loader />
