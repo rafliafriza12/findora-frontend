@@ -12,6 +12,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        momentum: ['"Momentum Extended"', "sans-serif"],
+        sora: ["Sora", "sans-serif"],
+      },
     },
   },
   plugins: [],
