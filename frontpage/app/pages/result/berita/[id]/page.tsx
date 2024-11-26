@@ -40,7 +40,10 @@ const Berita: React.FC<BeritaPageProps> = ({ params }) => {
         </div>
       ) : (
         <div className=" w-full flex flex-col p-14 items-center gap-10">
-          <div className=" px-28 py-2 rounded-full bg-black">
+          <div
+            onClick={() => router.push("/")}
+            className=" px-28 py-2 rounded-full bg-black cursor-pointer"
+          >
             <Image src={findora} alt="Findora" width={200} height={100} />
           </div>
           <div className=" w-[80%]">
@@ -58,9 +61,20 @@ const Berita: React.FC<BeritaPageProps> = ({ params }) => {
             <h1 className=" font-bold text-2xl font-sora text-white">
               {document.title}
             </h1>
-            <p className=" w-full whitespace-pre-line text-lg text-[#ada7cd]">
-              {document.paragraph}
-            </p>
+            <div className="w-full">
+              <div className=" w-[50%] h-[40vh] relative float-left mr-10 mb-5">
+                <Image
+                  src={document?.imageSrc}
+                  objectFit="cover"
+                  layout="fill"
+                  alt="Gambar"
+                  className="relative rounded-[16px]"
+                />
+              </div>
+              <p className=" w-full whitespace-pre-line text-lg text-[#ada7cd]">
+                {document.paragraph}
+              </p>
+            </div>
           </div>
         </div>
       )}

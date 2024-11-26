@@ -3,6 +3,7 @@ import { useState } from "react";
 import findora from "../public/assets/findora.png";
 import { Search, ThumbsUp, Newspaper, Info } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { TypeAnimation } from "react-type-animation";
 import Image from "next/image";
 export default function Home() {
   const landingCardContent: any = [
@@ -45,13 +46,22 @@ export default function Home() {
         <h1>LET'S FIND AND EXPLORA</h1>
       </div>
       <div className="w-full flex flex-col items-center gap-16 mt-36">
-        <div className="w-[30vw] h-[15vh] relative">
-          <Image src={findora} alt="Findora" layout="fill" objectFit="cover" />
+        <div className="">
+          <Image src={findora} alt="Findora" width={600} height={200} />
         </div>
         <div className="w-[40%] flex flex-col items-center gap-8">
-          <h1 className="text-white font-momentum font-bold text-lg">
-            How can I help you find the news?
-          </h1>
+          <TypeAnimation
+            sequence={[
+              // Same substring at the start will only be typed out once, initially
+              "How can I help you find the news?",
+              1000, // wait 1s before replacing "Mice" with "Hamsters"
+              "",
+            ]}
+            wrapper="span"
+            speed={50}
+            className="text-white font-momentum font-bold text-lg"
+            repeat={Infinity}
+          />
           <div className=" w-full h-[7vh] flex items-center justify-between">
             <input
               type="text"

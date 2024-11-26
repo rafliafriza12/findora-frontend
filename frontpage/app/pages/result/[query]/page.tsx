@@ -61,7 +61,10 @@ const ResultPage: React.FC<resultPageProps> = ({ params }) => {
 
   return (
     <div className="w-full relative flex flex-col items-center py-14 gap-14">
-      <div className=" px-28 py-2 rounded-full bg-black">
+      <div
+        onClick={() => router.push("/")}
+        className=" px-28 py-2 rounded-full bg-black cursor-pointer"
+      >
         <Image src={findora} alt="Findora" width={200} height={100} />
       </div>
 
