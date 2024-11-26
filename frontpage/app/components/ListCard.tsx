@@ -8,7 +8,7 @@ const ListCard: React.FC<ListCardProps> = ({ item }) => {
       <div className=" w-[40%] h-full relative overflow-hidden rounded-l-[16px]">
         {item?.imageSrc !== "Gambar tidak ditemukan" ? (
           <Image
-            src={item?.imageSrc.split("?")[0]}
+            src={item?.imageSrc}
             alt="Image"
             layout="fill"
             objectFit="cover"
