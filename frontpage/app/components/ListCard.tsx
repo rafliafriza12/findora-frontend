@@ -27,7 +27,7 @@ const ListCard: React.FC<ListCardProps> = ({ item }) => {
       <div className="flex flex-col gap-3 w-[59%] px-6 py-9">
         <h1 className=" font-semibold text-lg">{item?.title}</h1>
         <p className=" text-justify text-gray-300">
-          {item?.paragraph.slice(0, 50)}[....]
+          {item?.paragraph?.slice(0, 50)}[....]
         </p>
         <Link
           className=" hover:underline text-[#ada7cd]"
