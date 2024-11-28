@@ -6,9 +6,10 @@ import findora from "../../../../public/assets/findora.png";
 import ListCard from "@/app/components/ListCard";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Search, GitCompare } from "lucide-react";
 import API from "@/app/utils/API";
 import Loader from "@/app/components/Loader";
+import Evaluation from "@/app/components/modals/evaluation";
 const ResultPage: React.FC<resultPageProps> = ({ params }) => {
   const [search, setSearch] = useState<string>(
     decodeURIComponent(params.query)
@@ -17,6 +18,11 @@ const ResultPage: React.FC<resultPageProps> = ({ params }) => {
   const [documentsJaccard, setDocumentJaccard] = useState<any>([]);
   const [isLoadingCosine, setIsLoadingCosine] = useState<boolean>(true);
   const [isLoadingJaccard, setIsLoadingJaccard] = useState<boolean>(true);
+  const [evaluationJaccard, setEvaluationJaccard] = useState<any>({});
+  const [runtimeJaccard, setRuntimeJaccard] = useState<string>("");
+  const [evaluationCosine, setEvaluationCosine] = useState<any>({});
+  const [runtimeCosine, setRuntimeCosine] = useState<string>("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const router: any = useRouter();
 
   const getDocumentsCosine = () => {
@@ -27,6 +33,8 @@ const ResultPage: React.FC<resultPageProps> = ({ params }) => {
         console.log(res.data);
         setIsLoadingCosine(false);
         setDocumentCosine(res.data.results);
+        setEvaluationCosine(res.data.evaluationMetrics);
+        setRuntimeCosine(res.data.runtime);
       })
       .catch((err) => {
         console.log(err);
@@ -41,6 +49,8 @@ const ResultPage: React.FC<resultPageProps> = ({ params }) => {
         console.log(res.data);
         setIsLoadingJaccard(false);
         setDocumentJaccard(res.data.results);
+        setEvaluationJaccard(res.data.evaluationMetrics);
+        setRuntimeJaccard(res.data.runtime);
       })
       .catch((err) => {
         console.log(err);
@@ -61,6 +71,22 @@ const ResultPage: React.FC<resultPageProps> = ({ params }) => {
 
   return (
     <div className="w-full relative flex flex-col items-center py-14 gap-14">
+      <div
+        onClick={() => setIsOpen(!isOpen)}
+        className=" w-[60px] h-[60px] fixed z-50 bottom-10 right-10 rounded-[16px] bg-gradient-to-r from-[#426BFF] to-[#8F79FF] flex justify-center items-center cursor-pointer"
+      >
+        <GitCompare size={28} color="#ffffff" />
+      </div>
+      {isOpen && (
+        <Evaluation
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          evaluationMetricsCosine={evaluationCosine}
+          runtimeCosine={runtimeCosine}
+          evaluationMetricsJaccard={evaluationJaccard}
+          runtimeJaccard={runtimeJaccard}
+        />
+      )}
       <div
         onClick={() => router.push("/")}
         className=" px-28 py-2 rounded-full bg-black cursor-pointer"

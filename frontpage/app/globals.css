@@ -22,13 +22,13 @@ body {
 } */
 @font-face {
   font-family: "Momentum Extended";
-  src: url("/fonts/MomentumExtended-Regular.otf") format("opentype");
+  src: url("/public/fonts/MomentumExtended-Regular.otf") format("opentype");
   font-weight: 400; /* Weight untuk Regular */
   font-style: normal;
 }
 @font-face {
   font-family: "Momentum Extended";
-  src: url("/fonts/MomentumExtended-Ultrabold.otf") format("opentype");
+  src: url("/public/fonts/MomentumExtended-Ultrabold.otf") format("opentype");
   font-weight: 700; /* Weight untuk Bold */
   font-style: normal;
 }

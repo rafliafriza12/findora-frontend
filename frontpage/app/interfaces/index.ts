@@ -21,3 +21,12 @@ export interface BeritaPageProps {
     id: string;
   };
 }
+
+export interface EvaluationProps {
+  isOpen: boolean;
+  setIsOpen: any;
+  evaluationMetricsCosine: any;
+  runtimeCosine: string;
+  evaluationMetricsJaccard: any;
+  runtimeJaccard: string;
+}
