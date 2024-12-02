@@ -1,36 +1,34 @@
 name: CI for Next.js in frontpage folder
-
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [20.12.2]  # Versi Node.js yang Anda gunakan
-
+        node-version: [20.12.2]
     steps:
-    # Checkout kode dari repository
     - name: Checkout repository
       uses: actions/checkout@v4
-
-    # Setup Node.js dengan versi yang sesuai
+      with:
+        fetch-depth: 0
     - name: Setup Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: "yarn"
-
-    # Clean yarn cache sebelum install
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.yarn
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
     - name: Clean yarn cache
       run: yarn cache clean
-
-    # Debugging: Lihat isi direktori sebelum melanjutkan
     - name: Change to project directory
       run: |
         echo "Current Directory:"
@@ -41,13 +39,14 @@ jobs:
         echo "Inside Frontpage Directory:"
         pwd
         ls -la
-
-    # Install dependensi menggunakan Yarn di folder frontpage
     - name: Install dependencies
       run: yarn install --frozen-lockfile
       working-directory: ./frontpage
-
-    # Build proyek Next.js di folder frontpage
+    - name: Change to root directory
+      run: |
+        cd ..
+        echo "Back to Root Directory:"
+        pwd
     - name: Build project
       run: yarn build
       working-directory: ./frontpage
