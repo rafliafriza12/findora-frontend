@@ -29,14 +29,8 @@ jobs:
           ${{ runner.os }}-yarn-
     - name: Clean yarn cache
       run: yarn cache clean
-    - name: Change to project directory
+    - name: List project directory
       run: |
-        echo "Current Directory:"
-        pwd
-        echo "Root Directory Content:"
-        ls -la
-        cd frontpage
-        echo "Inside Frontpage Directory:"
         pwd
         ls -la
     - name: Install dependencies
@@ -45,7 +39,6 @@ jobs:
     - name: Change to root directory
       run: |
         cd ..
-        echo "Back to Root Directory:"
         pwd
     - name: Build project
       run: yarn build
