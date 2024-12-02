@@ -1,4 +1,4 @@
-name: CI for Next.js
+name: CI for Next.js in frontpage folder
 
 on:
   push:
@@ -26,18 +26,27 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: "yarn" # Aktifkan cache untuk Yarn
 
+    # Pindah ke folder frontpage sebelum menjalankan perintah
+    - name: Change to frontpage directory
+      working-directory: ./frontpage
+      run: echo "Using frontpage folder as project root"
+
     # Install dependensi menggunakan Yarn
     - name: Install dependencies
+      working-directory: ./frontpage
       run: yarn install --frozen-lockfile
 
     # Build proyek Next.js
     - name: Build project
+      working-directory: ./frontpage
       run: yarn build
 
-    # Jalankan tes (opsional, tambahkan jika Anda memiliki script `test` di package.json)
+    # Jalankan tes (opsional, tambahkan jika ada script `test` di package.json)
     - name: Run tests
+      working-directory: ./frontpage
       run: yarn test
 
     # (Opsional) Periksa format kode dengan lint
     - name: Run lint
+      working-directory: ./frontpage
       run: yarn lint
