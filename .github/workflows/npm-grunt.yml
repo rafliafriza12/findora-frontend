@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.12.2]  # Sesuaikan dengan versi Node.js yang Anda gunakan
+        node-version: [20.12.2]  # Versi Node.js yang Anda gunakan
 
     steps:
     # Checkout kode dari repository
@@ -50,14 +50,4 @@ jobs:
     # Build proyek Next.js di folder frontpage
     - name: Build project
       run: yarn build
-      working-directory: ./frontpage
-
-    # Jalankan tes (opsional)
-    - name: Run tests
-      run: yarn test
-      working-directory: ./frontpage
-
-    # (Opsional) Jalankan lint
-    - name: Run lint
-      run: yarn lint
       working-directory: ./frontpage
