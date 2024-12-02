@@ -26,6 +26,18 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: "yarn"
 
+    # Debugging: Lihat isi direktori sebelum melanjutkan
+    - name: Change to project directory
+      run: |
+        echo "Current Directory:"
+        pwd
+        echo "Root Directory Content:"
+        ls -la
+        cd frontpage
+        echo "Inside Frontpage Directory:"
+        pwd
+        ls -la
+
     # Install dependensi menggunakan Yarn di folder frontpage
     - name: Install dependencies
       run: yarn install --frozen-lockfile
