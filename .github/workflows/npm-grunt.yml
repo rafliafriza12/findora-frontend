@@ -1,4 +1,4 @@
-name: CI for Next.js in frontpage folder
+name: CI for Next.js
 on:
   push:
     branches: [ "main" ]
@@ -35,7 +35,5 @@ jobs:
         ls -la
     - name: Install dependencies
       run: yarn install --frozen-lockfile
-      working-directory: ./
     - name: Build project
       run: yarn build
-      working-directory: ./
