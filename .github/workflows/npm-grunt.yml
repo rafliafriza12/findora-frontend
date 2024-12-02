@@ -1,4 +1,4 @@
-name: NodeJS with Grunt
+name: CI for Next.js
 
 on:
   push:
@@ -12,17 +12,32 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [18.x, 20.x, 22.x] # Versi Node.js yang akan diuji
 
     steps:
-    - uses: actions/checkout@v4
+    # Checkout kode dari repository
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    # Setup Node.js dengan versi yang sesuai
+    - name: Setup Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+        cache: "yarn" # Aktifkan cache untuk Yarn
 
-    - name: Build
-      run: |
-        npm install
-        grunt
+    # Install dependensi menggunakan Yarn
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
+
+    # Build proyek Next.js
+    - name: Build project
+      run: yarn build
+
+    # Jalankan tes (opsional, tambahkan jika Anda memiliki script `test` di package.json)
+    - name: Run tests
+      run: yarn test
+
+    # (Opsional) Periksa format kode dengan lint
+    - name: Run lint
+      run: yarn lint
