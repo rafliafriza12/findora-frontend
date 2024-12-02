@@ -35,11 +35,7 @@ jobs:
         ls -la
     - name: Install dependencies
       run: yarn install --frozen-lockfile
-      working-directory: ./frontpage
-    - name: Change to root directory
-      run: |
-        cd ..
-        pwd
+      working-directory: ./
     - name: Build project
       run: yarn build
-      working-directory: ./frontpage
+      working-directory: ./
