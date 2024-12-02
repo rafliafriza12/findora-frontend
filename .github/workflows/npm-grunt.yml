@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.12.2]  # Sesuaikan dengan versi Node.js yang Anda gunakan
 
     steps:
     # Checkout kode dari repository
@@ -25,6 +25,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: "yarn"
+
+    # Clean yarn cache sebelum install
+    - name: Clean yarn cache
+      run: yarn cache clean
 
     # Debugging: Lihat isi direktori sebelum melanjutkan
     - name: Change to project directory
