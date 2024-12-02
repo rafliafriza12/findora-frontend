@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x] # Versi Node.js yang akan diuji
+        node-version: [18.x, 20.x, 22.x]
 
     steps:
     # Checkout kode dari repository
@@ -24,29 +24,24 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: "yarn" # Aktifkan cache untuk Yarn
+        cache: "yarn"
 
-    # Pindah ke folder frontpage sebelum menjalankan perintah
-    - name: Change to frontpage directory
-      working-directory: ./frontpage
-      run: echo "Using frontpage folder as project root"
-
-    # Install dependensi menggunakan Yarn
+    # Install dependensi menggunakan Yarn di folder frontpage
     - name: Install dependencies
-      working-directory: ./frontpage
       run: yarn install --frozen-lockfile
+      working-directory: ./frontpage
 
-    # Build proyek Next.js
+    # Build proyek Next.js di folder frontpage
     - name: Build project
-      working-directory: ./frontpage
       run: yarn build
+      working-directory: ./frontpage
 
-    # Jalankan tes (opsional, tambahkan jika ada script `test` di package.json)
+    # Jalankan tes (opsional)
     - name: Run tests
-      working-directory: ./frontpage
       run: yarn test
-
-    # (Opsional) Periksa format kode dengan lint
-    - name: Run lint
       working-directory: ./frontpage
+
+    # (Opsional) Jalankan lint
+    - name: Run lint
       run: yarn lint
+      working-directory: ./frontpage
